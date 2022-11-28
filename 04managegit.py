@@ -152,6 +152,31 @@ def getfolder():
     )
     return jsonify({'folderplane':thefolderplane})
 
+@app.post('/show/foldertree')
+def getfolderstree():
+    """
+    :param reponame:
+    """
+    json_data = checkparam(request.form,"reponame")
+    reponame = json_data['reponame']
+    thefolderplane=foldertree(
+        os.path.join(localstore,reponame),
+        path_from_projectfolder="",
+        iteractive=True
+    )
+    return jsonify({'foldertree':thefolderplane})
+
+@app.post('/show/gitlogs')
+def getgitlogs():
+    """
+    :param reponame:
+    """
+    json_data = checkparam(request.form,"reponame")
+    reponame = json_data['reponame']
+    # log
+    logs = log(os.path.join(localstore, reponame))
+    return jsonify({'logs':logs})
+
 @app.post('/get/file')
 def getfile():
     """

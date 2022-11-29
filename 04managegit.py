@@ -73,14 +73,19 @@ def foldertree(abspath, path_from_projectfolder="", iteractive=False):
                 folders.append(foldertree(
                 item_abspath, os.path.join(path_from_projectfolder, item),True))
             else:
-                folders.append({'name':item,'rel_path':str2base64str(os.path.join(path_from_projectfolder,item))})
+                folders.append({
+                    'name':item,
+                    'rel_path':str2base64str(os.path.join(path_from_projectfolder,item)),
+                    'type':'file'
+                    })
         else:
             files.append({'name': item, 'rel_path': str2base64str(os.path.join(path_from_projectfolder, item))})
     return {
         'name': thisfoldername,
         'rel_path':str2base64str(path_from_projectfolder),
         'files': files,
-        'folders': folders
+        'folders': folders,
+        'type':'folder'
     }
 
 def savebytestodisk(abspath, filecontent):

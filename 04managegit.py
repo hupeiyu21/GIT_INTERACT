@@ -150,7 +150,7 @@ def getfolder():
         path_from_projectfolder=folder_rel_path,
         iteractive=False
     )
-    return jsonify({'folderplane':thefolderplane})
+    return jsonify({'folderplane':thefolderplane,'upper_folder_rel_path':str2base64str(os.path.split(folder_rel_path)[0])})
 
 @app.post('/show/foldertree')
 def getfolderstree():

@@ -76,10 +76,14 @@ def foldertree(abspath, path_from_projectfolder="", iteractive=False):
                 folders.append({
                     'name':item,
                     'rel_path':str2base64str(os.path.join(path_from_projectfolder,item)),
-                    'type':'file'
+                    'type':'folder'
                     })
         else:
-            files.append({'name': item, 'rel_path': str2base64str(os.path.join(path_from_projectfolder, item))})
+            files.append({
+                'name': item, 
+                'rel_path': str2base64str(os.path.join(path_from_projectfolder, item)),
+                'type':'file'
+                })
     return {
         'name': thisfoldername,
         'rel_path':str2base64str(path_from_projectfolder),

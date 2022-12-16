@@ -13,6 +13,12 @@ def clone(repo, dir):
         return {'status': 200, 'reponame': out[aind+1:bind]}
     return {'status': 400, 'info': out}
 
+def commit(commitname,dir):
+    ret, out = subprocess.getstatusoutput(
+        'cd {} && git add . && git commit -m {}'.format(dir, commitname))
+    if ret==0:
+        return True
+    return False
 
 def checkout(dir, hashcode):
     """

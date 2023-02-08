@@ -12,6 +12,10 @@ from controller.template import ProductView
 from controller.GitRepo.Clone import Clone
 from controller.GitRepo.Checkout import Checkout
 from controller.GitRepo.Gitlogs import Gitlogs
+from controller.GitRepo.CommitAll import CommitAll
+from controller.GitRepo.Push import Push
+from controller.GitRepo.Pull import Pull
+
 from controller.File.Folderplane import Folderplane
 from controller.File.Foldertree import Foldertree
 from controller.File.Getfile import Getfile
@@ -33,6 +37,10 @@ api.add_resource(Foldertree,'/show/foldertree',endpoint='foldertree')
 api.add_resource(Getfile,'/get/file',endpoint='getfile')
 api.add_resource(Writefile,'/write/file',endpoint='writefile')
 api.add_resource(WritefileCommit,'/commit/file',endpoint='writefilecommit')
+api.add_resource(CommitAll,"/commit/all",endpoint="commit all staged")
+api.add_resource(Push,"/git/push",endpoint="push to remote")
+api.add_resource(Pull,"/git/pull",endpoint="pull")
+
 # RedisMQ
 api.add_resource(PushQueue,'/push/message',endpoint="MQpush")
 api.add_resource(GetQueueRec,'/rec/queue',endpoint="MQrec")

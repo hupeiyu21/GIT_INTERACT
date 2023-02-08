@@ -59,5 +59,6 @@ if __name__ == '__main__':
     #
     rr,ooutput=subprocess.getstatusoutput('echo %cd%')
     print("we now at {}".format(ooutput))
+    app.config.from_pyfile("settings.py")
     app.run(host='localhost', port=5000)
     

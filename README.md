@@ -28,9 +28,15 @@ file_rel_path/folder_rel_path: 文件/文件夹的相对路径（相对于项目
 
 file_content: 上传的某个代码文件内容（formdata形式的file），前端如何发起这种请求请看API文档里的"示例代码"
 
-# git代理重置
+# 开发问题
+
+## git代理重置
+
 git config --global --unset http.proxy
 git config --global --unset https.proxy
+
+## 冲突问题解决
+用户正常编辑文件然后(add+)commit+push后，如果push报错，会建议用户进行pull，在pull的时候会提示用户有unmerged文件，随后可以调用冲突文件分割接口，选择保留本地或远端更改，然后(add)+commit+push
 
 
 

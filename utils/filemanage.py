@@ -45,3 +45,15 @@ def savebytestodisk(abspath, filecontent):
         return True
     else:
         return False
+    
+def checkfiles_exist(filepathlist):
+    """
+    check whether a range of files are in disk
+    """
+    donothave=[]
+    for file in filepathlist:
+        if(not os.path.exists(file)):
+            donothave.append(file)
+    if donothave:
+        return {'res':False,'filelist':donothave}
+    return {'res':True}

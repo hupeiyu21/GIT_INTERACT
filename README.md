@@ -1,13 +1,21 @@
-# 运行
+# 开发运行
+
+python版本≥3.6.5，推荐3.9.0
 
 1. 命令行**cd到**`04managegit.py`所在目录下,使用 `pip install -r requirements.txt` 下载所需模块
-2. 运行 `python 04managegit.py` 
+2. 运行 `python 04managegit.py --redispwd ${redis密码} --debug on`
 
 默认项目们的存储文件夹设置在与`04managegit.py`文件同目录下，名字为storaged
 
 默认基地址为 `http://127.0.0.1:5000`，请求该地址，后面加上接口的路由即可
 
 请求类型和请求参数类型见文档
+
+# 部署运行(Docker)
+
+1. 在当前项目所在目录下执行 `docker build -t "flask_gitmanage_image" .`
+2. （可跳过）使用`docker images`查看所有镜像，应有flask_gitmanage_image
+3. `docker run --name flask_gitmanage_contain -p 5000:5000 flask_gitmanage_image`
 
 # 接口
 
@@ -33,10 +41,14 @@ file_content: 上传的某个代码文件内容（formdata形式的file），前
 ## git代理重置
 
 git config --global --unset http.proxy
+
 git config --global --unset https.proxy
 
 ## 冲突问题解决
 用户正常编辑文件然后(add+)commit+push后，如果push报错，会建议用户进行pull，在pull的时候会提示用户有unmerged文件，随后可以调用冲突文件分割接口，选择保留本地或远端更改，然后(add)+commit+push
+
+## 文件夹
+
 
 
 

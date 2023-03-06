@@ -51,9 +51,9 @@ api.add_resource(GetQueueRec,'/rec/queue',endpoint="MQrec")
 api.add_resource(Setnew,'/set/value',endpoint="setfullrec")
 api.add_resource(GetValueRec,'/rec/value',endpoint="runfullrec")
 
-
 CORS(app, resources=r'/*')
-if __name__ == '__main__':
+
+def main():
     # 从命令行获取参数
     paramparser=argparse.ArgumentParser()
     paramparser.add_argument('--redispwd',help='password for Redis')
@@ -75,10 +75,21 @@ if __name__ == '__main__':
     app.redis=rediscnn
     # 增量恢复数据库的脚本的路径
     app.config['DBrecbash_path']="./incre_recover.sh"
-    app.config['DBfullbash_path']="./incre_recover.sh"
+    app.config['DBfullbash_path']="./full_recover.sh"
     # 输出启动路径
     rr,ooutput=subprocess.getstatusoutput('echo %cd%')
     print("We now at {}".format(ooutput))
     app.config.from_pyfile("settings.py")
+    return app
+
+if __name__ == '__main__':
+    main()
     app.run(host='localhost', port=5000)
-    
+
+def createapp(*args, **kwargs):
+    import sys
+    sys.argv = ['--gunicorn']
+    for k in kwargs:
+        sys.argv.append("--" + k)
+        sys.argv.append(kwargs[k])
+    return main()

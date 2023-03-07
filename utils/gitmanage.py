@@ -23,6 +23,7 @@ def commit(commitname, dir):
     # print(out)
     if ret == 0:
         return True
+    print(out)
     return False
 
 def checkout(dir, hashcode):

@@ -1,24 +1,27 @@
 # 开发运行
 
-python版本≥3.6.5，推荐3.9.0
+需要：
+
+python版本3.6.5
+安装git
+启动了redis-server
+
+步骤：
 
 1. 命令行**cd到**`04managegit.py`所在目录下,使用 `pip install -r requirements.txt` 下载所需模块
 2. 运行 `python 04managegit.py --redispwd ${redis密码} --debug on`
+
+配置：
 
 默认项目们的存储文件夹设置在与`04managegit.py`文件同目录下，名字为storaged
 
 默认基地址为 `http://127.0.0.1:5000`，请求该地址，后面加上接口的路由即可
 
+默认数据库备份指令在本项目目录下，名为incre_recover.sh和full_recover.sh
+
 请求类型和请求参数类型见文档
 
-# 部署运行(Docker)
-
-1. 在当前项目所在目录下执行 `docker build -t "flask_gitmanage_image" .`
-2. （可跳过）使用`docker images`查看所有镜像，应有flask_gitmanage_image
-3. `docker run --name flask_gitmanage_contain -p 5000:5000 flask_gitmanage_image`
-
 # 接口
-
 
 见API文档: `https://www.apifox.cn/apidoc/shared-551b58ad-5b92-418a-aa3a-08cbda86a84c`
 
@@ -47,8 +50,14 @@ git config --global --unset https.proxy
 ## 冲突问题解决
 用户正常编辑文件然后(add+)commit+push后，如果push报错，会建议用户进行pull，在pull的时候会提示用户有unmerged文件，随后可以调用冲突文件分割接口，选择保留本地或远端更改，然后(add)+commit+push
 
-## 文件夹
+## 生成requirements.txt
 
+在虚拟环境（conda）下
 
+```
+pip freeze > requirements.txt
+```
+
+使用pipreqs生成的部分库版本号不对
 
 

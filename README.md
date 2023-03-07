@@ -21,6 +21,13 @@ python版本3.6.5
 
 请求类型和请求参数类型见文档
 
+# 部署运行(Docker)
+
+1. 将ssh私钥(id_rsa文件)，放置到后端项目的目录下
+2. 在Flask项目所在目录下执行 `docker build -t "flask_gitmanage_image" .`
+3. （可跳过）使用`docker images`查看所有镜像，其中应该有flask_gitmanage_image
+4. `docker run --name flask_gitmanage_contain -p 5000:5000 flask_gitmanage_image`
+
 # 接口
 
 见API文档: `https://www.apifox.cn/apidoc/shared-551b58ad-5b92-418a-aa3a-08cbda86a84c`

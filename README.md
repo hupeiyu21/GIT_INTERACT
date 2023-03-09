@@ -36,7 +36,7 @@ python版本3.6.5
 
 ## 参数说明
 
-repodir: git仓库的克隆地址 目前http和ssh都可以
+repodir: git仓库的ssh克隆地址（标签栏选择ssh链接）
 
 reponame: 调用`/repo/clone`或`/repo/checkout`后返回的json里'foldertree'里最外部的'name'（也就是克隆下来的项目文件夹名），调用git clone后建议前端将这个存储下来
 

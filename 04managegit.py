@@ -51,6 +51,11 @@ api.add_resource(GetQueueRec,'/rec/queue',endpoint="MQrec")
 api.add_resource(Setnew,'/set/value',endpoint="setfullrec")
 api.add_resource(GetValueRec,'/rec/value',endpoint="runfullrec")
 
+# 前端网页的部署
+@app.get('/')
+def index():
+    return render_template('index.html')
+
 CORS(app, resources=r'/*')
 
 def main():

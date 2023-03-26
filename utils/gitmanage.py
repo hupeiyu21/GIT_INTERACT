@@ -30,8 +30,11 @@ def checkout(dir, hashcode):
     """
     通过git切换版本
     """
+    # 会有个nul文件里面有checkout相关
+    # ret, out = subprocess.getstatusoutput(
+    #     'cd {} && git checkout 1>nul 2>nul {}'.format(dir, hashcode))
     ret, out = subprocess.getstatusoutput(
-        'cd {} && git checkout 1>nul 2>nul {}'.format(dir, hashcode))
+        'cd {} && git checkout {}'.format(dir, hashcode))
     # if ret==0:
     # 成功
     return ret

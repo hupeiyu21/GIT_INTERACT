@@ -1,7 +1,7 @@
 from flask_restful import Resource, reqparse
 from flask import current_app,abort,Response,jsonify 
 import os
-from utils.gitmanage import clone,log
+from utils.gitmanage import clone,log,nowcommit
 from utils.filemanage import foldertree
 
 class Clone(Resource):
@@ -22,6 +22,8 @@ class Clone(Resource):
         reponame = res['reponame']
         # log
         logs = log(os.path.join(current_app.config['localstore'], reponame))
+        # commitid
+        nowcommitid=nowcommit(os.path.join(current_app.config['localstore'], reponame))
         # foldertree
         thefoldertree = foldertree(os.path.join(current_app.config['localstore'], reponame),iteractive=True)
-        return jsonify({'reponame': reponame, 'logs': logs, 'foldertree': thefoldertree})
+        return jsonify({'reponame': reponame, 'logs': logs, 'foldertree': thefoldertree,"commitid":nowcommitid})

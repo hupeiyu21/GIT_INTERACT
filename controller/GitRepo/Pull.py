@@ -1,6 +1,8 @@
 from flask_restful import Resource, reqparse
 from flask import current_app,abort,Response,jsonify
 import os
+from utils.filemanage import foldertree
+from utils.gitmanage import nowcommit
 from utils.gitmanage import pull,diff
 
 class Pull(Resource):
@@ -15,8 +17,11 @@ class Pull(Resource):
         
         reponame=args["reponame"]
         repodir=os.path.join(current_app.config['localstore'],reponame)
+        thefoldertree = foldertree(os.path.join(current_app.config['localstore'], reponame),iteractive=True)
+        nowcommitid=nowcommit(os.path.join(current_app.config['localstore'], reponame))
         if(pull(repodir)):
-            return "ok"
+            return jsonify({"foldertree":thefoldertree,
+                            "commitid":nowcommitid})
         else:
             # 显示冲突
             return abort(jsonify({'files':diff(repodir)}))

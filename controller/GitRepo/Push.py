@@ -17,8 +17,7 @@ class Push(Resource):
         try:
             pushres=push(os.path.join(current_app.config['localstore'],reponame))
         except Exception as e:
-            print("error happend")
-            return abort(Response("Failed, try `git pull` before push"))
-        return "done"
+            return {"msg":"failed, maybe try git pull?"},400
+        return {"msg":"successfull push"},200
         
         

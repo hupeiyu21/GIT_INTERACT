@@ -18,5 +18,5 @@ class SplitFile(Resource):
         
         file_path = os.path.join(current_app.config['localstore'], reponame, file_path)
         
-        return jsonify(splitByVersion(file_path))
+        return splitByVersion(file_path)
         

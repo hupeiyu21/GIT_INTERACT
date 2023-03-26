@@ -16,6 +16,6 @@ class CommitAll(Resource):
         reponame=args["reponame"]
         commitmsg=args["message"]
         if(commit(commitmsg,os.path.join(current_app.config['localstore'],reponame))):
-            return jsonify("ok")
-        return abort(Response("error when commit or nothing to commit"))
+            return {"msg":"success commit"}
+        return {"msg":"error when commit or nothing to commit"},400
         

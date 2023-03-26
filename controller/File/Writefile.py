@@ -21,4 +21,4 @@ class Writefile(Resource):
         # FormData file
         file_content=args['file_content'].read()
         savebytestodisk(os.path.join(current_app.config['localstore'],reponame,file_rel_path),file_content)
-        return jsonify({"upload":"ok"})
+        return {"msg":"sucess write file"}

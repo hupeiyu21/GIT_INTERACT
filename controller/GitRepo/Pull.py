@@ -20,9 +20,9 @@ class Pull(Resource):
         thefoldertree = foldertree(os.path.join(current_app.config['localstore'], reponame),iteractive=True)
         nowcommitid=nowcommit(os.path.join(current_app.config['localstore'], reponame))
         if(pull(repodir)):
-            return jsonify({"foldertree":thefoldertree,
-                            "commitid":nowcommitid})
+            return {"foldertree":thefoldertree,
+                            "commitid":nowcommitid}
         else:
             # 显示冲突
-            return abort(jsonify({'files':diff(repodir)}))
+            return {'msg':"files conflict",'files':diff(repodir)},400
         

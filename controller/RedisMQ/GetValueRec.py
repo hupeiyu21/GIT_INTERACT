@@ -34,7 +34,7 @@ class GetValueRec(Resource):
         # 检查是否存在
         checkres=checkfiles_exist([returndict["file_position"]])
         if(not checkres['res']):
-            return abort(jsonify({'res':'error','msg':'such backup files {} do not exist'.format(",".join(checkres['filelist']))}))
+            return {'res':'error','msg':'such backup files {} do not exist'.format(",".join(checkres['filelist']))},400
         ret, out = subprocess.getstatusoutput('bash {} -uroot -ppassword -P3306 -hIP -d {} -f "{}"'.format(current_app.config['DBfullbash_path'],old_db_name,returndict["file_position"]))
         print("Run full revocery, code={}, out={}".format(ret,out))
         return {'res':'success','msg':returndict}

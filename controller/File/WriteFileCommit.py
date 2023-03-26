@@ -25,6 +25,6 @@ class WritefileCommit(Resource):
         file_content=args['file_content'].read()
         savebytestodisk(os.path.join(current_app.config['localstore'],reponame,file_rel_path),file_content)
         if(commit(commitmsg,os.path.join(current_app.config['localstore'],reponame))):
-            return jsonify({"commit":"ok"})
+            return {"msg":"Successful save and commit"}
         else:
-            return abort(Response("Successful save, error commit"))
+            return {"msg":"Successful save, error commit"},400

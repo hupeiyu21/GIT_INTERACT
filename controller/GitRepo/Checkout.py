@@ -17,7 +17,7 @@ class Checkout(Resource):
         # checkout
         res = checkout(os.path.join(current_app.config['localstore'], reponame), hashcode)
         if res != 0:
-            abort(Response("Checkout Failed",status=400))
+            return {"msg":"Checkout Failed"},400
         # foldertree
         thefoldertree = foldertree(os.path.join(current_app.config['localstore'], reponame),iteractive=True)
-        return jsonify({'foldertree': thefoldertree, 'commitid': hashcode})
+        return {"msg":"success checkout",'foldertree': thefoldertree, 'commitid': hashcode}

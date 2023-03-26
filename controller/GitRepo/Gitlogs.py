@@ -16,5 +16,5 @@ class Gitlogs(Resource):
         # log
         logs = log(os.path.join(current_app.config['localstore'], reponame))
         nowcommitid=nowcommit(os.path.join(current_app.config['localstore'], reponame))
-        return jsonify({'logs':logs,'commitid':nowcommitid})
+        return {'logs':logs,'commitid':nowcommitid}
         

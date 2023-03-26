@@ -17,5 +17,5 @@ class Foldertree(Resource):
             path_from_projectfolder="",
             iteractive=True
         )
-        return jsonify({'foldertree':thefolderplane})
+        return {'foldertree':thefolderplane}
         

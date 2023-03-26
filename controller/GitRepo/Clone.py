@@ -26,4 +26,4 @@ class Clone(Resource):
         nowcommitid=nowcommit(os.path.join(current_app.config['localstore'], reponame))
         # foldertree
         thefoldertree = foldertree(os.path.join(current_app.config['localstore'], reponame),iteractive=True)
-        return jsonify({'reponame': reponame, 'logs': logs, 'foldertree': thefoldertree,"commitid":nowcommitid})
+        return {'reponame': reponame, 'logs': logs, 'foldertree': thefoldertree,"commitid":nowcommitid,"msg":"successful clone"}

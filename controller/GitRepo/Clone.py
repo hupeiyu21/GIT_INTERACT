@@ -11,19 +11,22 @@ class Clone(Resource):
         """
         :param repodir:
         """
-        parse = reqparse.RequestParser()
-        parse.add_argument('repodir', type=str, help='must need a repo url', required=True, trim=True, location='form')
-        args = parse.parse_args()
-        repodir = args['repodir']
-        # clone git仓库
-        res = clone(repodir, current_app.config['localstore'])
-        if res['status'] != 200:
-            abort(Response(res['info'], status=400))
-        reponame = res['reponame']
-        # log
-        logs = log(os.path.join(current_app.config['localstore'], reponame))
-        # commitid
-        nowcommitid=nowcommit(os.path.join(current_app.config['localstore'], reponame))
-        # foldertree
-        thefoldertree = foldertree(os.path.join(current_app.config['localstore'], reponame),iteractive=True)
-        return {'reponame': reponame, 'logs': logs, 'foldertree': thefoldertree,"commitid":nowcommitid,"msg":"successful clone"}
+        try:
+            parse = reqparse.RequestParser()
+            parse.add_argument('repodir', type=str, help='must need a repo url', required=True, trim=True, location='form')
+            args = parse.parse_args()
+            repodir = args['repodir']
+            # clone git仓库
+            res = clone(repodir, current_app.config['localstore'])
+            if res['status'] != 200:
+                return {"msg":res['info']}, 400
+            reponame = res['reponame']
+            # log
+            logs = log(os.path.join(current_app.config['localstore'], reponame))
+            # commitid
+            nowcommitid=nowcommit(os.path.join(current_app.config['localstore'], reponame))
+            # foldertree
+            thefoldertree = foldertree(os.path.join(current_app.config['localstore'], reponame),iteractive=True)
+            return {'reponame': reponame, 'logs': logs, 'foldertree': thefoldertree,"commitid":nowcommitid,"msg":"successful clone"}
+        except Exception as e:
+            return {'msg':"Error when clone"},400

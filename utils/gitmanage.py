@@ -50,6 +50,13 @@ def log(dir):
         'cd {} && git log --all --encoding=GBK --pretty=format:"%H%n%cn%n%ci%n%s%n"'.format(dir))
     return [dict(zip(infomat, each.split("\n"))) for each in out.split("\n\n")]
 
+def nowcommit(dir):
+    '''
+    现在所处的commit的hash
+    '''
+    ret, out = subprocess.getstatusoutput(
+        'cd {} && git rev-parse HEAD'.format(dir))
+    return out
 
 def diff(dir):
     '''

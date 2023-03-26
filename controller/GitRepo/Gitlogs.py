@@ -1,7 +1,7 @@
 from flask_restful import Resource, reqparse
 from flask import current_app,abort,Response,jsonify
 import os
-from utils.gitmanage import log
+from utils.gitmanage import log,nowcommit
 
 class Gitlogs(Resource):
     
@@ -15,5 +15,6 @@ class Gitlogs(Resource):
         reponame = args['reponame']
         # log
         logs = log(os.path.join(current_app.config['localstore'], reponame))
-        return jsonify({'logs':logs})
+        nowcommitid=nowcommit(os.path.join(current_app.config['localstore'], reponame))
+        return jsonify({'logs':logs,'commitid':nowcommitid})
         

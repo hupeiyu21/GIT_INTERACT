@@ -3,6 +3,7 @@ from flask import current_app,abort,Response,jsonify,send_from_directory
 import os
 from utils.filemanage import foldertree
 from utils.base64_turn import base64str2str,str2base64str
+from utils.resplit import splitByVersion,needsplit
 
 class Getfile(Resource):
     
@@ -20,5 +21,11 @@ class Getfile(Resource):
         # 切割出文件名称
         name = os.path.split(file_path)[-1]
         folder_path = os.path.split(file_path)[0]
-        return send_from_directory(path=file_path, directory=folder_path, filename=name, as_attachment=True)
+        # 打印下是否需要切割
+        # print(needsplit(file_path))
+        if(not needsplit(file_path)):
+            # 不需要
+            return send_from_directory(path=file_path, directory=folder_path, filename=name, as_attachment=True)
+        else:
+            return splitByVersion(file_path),400
         

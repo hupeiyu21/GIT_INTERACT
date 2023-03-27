@@ -68,7 +68,7 @@ def diff(dir):
     repo=Repo(dir)
     diffres=repo.git.diff("--cached").split("\n")
 
-    diffres=[(res.strip().split(" ")[1],str2base64str(res.strip().split(" ")[3])) for res in diffres]
+    diffres=[str2base64str(res.strip().split(" ")[3]) for res in diffres]
     return diffres
 
 
@@ -89,6 +89,6 @@ def pull(dir):
         pullres=repo.git.pull()
     except Exception as e:
         elist=[w.strip() for w in str(e).split("\n")]
-        if "stderr: 'error: Pulling is not possible because you have unmerged files." in elist:
+        if "unmerged files" in elist:
             return False
     return True

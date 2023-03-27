@@ -15,6 +15,7 @@ from controller.GitRepo.Gitlogs import Gitlogs
 from controller.GitRepo.CommitAll import CommitAll
 from controller.GitRepo.Push import Push
 from controller.GitRepo.Pull import Pull
+from controller.GitRepo.Difflist import Difflist
 
 from controller.File.Folderplane import Folderplane
 from controller.File.Foldertree import Foldertree
@@ -37,6 +38,8 @@ api.add_resource(Checkout,"/repo/checkout",endpoint='checkout')
 api.add_resource(Gitlogs,'/show/gitlogs',endpoint='gitlogs')
 api.add_resource(Folderplane,'/show/folderplane',endpoint='folderplane')
 api.add_resource(Foldertree,'/show/foldertree',endpoint='foldertree')
+api.add_resource(Difflist,'/show/difflist',endpoint="gitdifffilelist")
+
 api.add_resource(Getfile,'/get/file',endpoint='getfile')
 api.add_resource(Writefile,'/write/file',endpoint='writefile')
 api.add_resource(WritefileCommit,'/commit/file',endpoint='writefilecommit')

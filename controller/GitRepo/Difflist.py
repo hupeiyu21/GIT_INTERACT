@@ -5,7 +5,7 @@ from utils.filemanage import foldertree
 from utils.gitmanage import nowcommit
 from utils.gitmanage import pull,diff
 
-class Pull(Resource):
+class Difflist(Resource):
     
     @staticmethod
     def post():
@@ -17,12 +17,6 @@ class Pull(Resource):
         
         reponame=args["reponame"]
         repodir=os.path.join(current_app.config['localstore'],reponame)
-        thefoldertree = foldertree(os.path.join(current_app.config['localstore'], reponame),iteractive=True)
-        nowcommitid=nowcommit(os.path.join(current_app.config['localstore'], reponame))
-        if(pull(repodir)):
-            return {"foldertree":thefoldertree,
-                    "commitid":nowcommitid}
-        else:
-            # 显示冲突
-            return {'msg':"files conflict",'files':diff(repodir)},400
+        # 显示冲突
+        return {'msg':"existed files conflict",'files':diff(repodir)},200
         

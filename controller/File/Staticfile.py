@@ -18,6 +18,6 @@ class Staticfile(Resource):
         name = os.path.split(file_path)[-1]
         folder_path = os.path.split(file_path)[0]
         
-        print("name",name,"folder",folder_path,"filepath",file_path)
+        # print("name",name,"folder",folder_path,"filepath",file_path)
         return send_from_directory(path=file_path, directory=folder_path, filename=name)
         

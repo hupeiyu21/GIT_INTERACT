@@ -23,6 +23,7 @@ from controller.File.Getfile import Getfile
 from controller.File.Writefile import Writefile
 from controller.File.WriteFileCommit import WritefileCommit
 from controller.File.SplitFile import SplitFile
+from controller.File.Staticfile import Staticfile
 # RedisMQ
 from controller.RedisMQ.Push import PushQueue
 from controller.RedisMQ.GetQueueRec import GetQueueRec
@@ -47,6 +48,7 @@ api.add_resource(CommitAll,"/commit/all",endpoint="commit all staged")
 api.add_resource(Push,"/git/push",endpoint="push to remote")
 api.add_resource(Pull,"/git/pull",endpoint="pull")
 api.add_resource(SplitFile,"/file/split",endpoint="split unmerged")
+api.add_resource(Staticfile,"/static",endpoint="staticfile")
 
 # RedisMQ
 api.add_resource(PushQueue,'/push/message',endpoint="MQpush")

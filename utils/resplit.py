@@ -1,6 +1,6 @@
 import re
 
-pattern=re.compile(r'<*? HEAD\n(.*?)\n=======\n(.*?)\n>*? [^\n]*?\n',flags=re.DOTALL)
+pattern=re.compile(r'<<<<<<< HEAD\n(.*?)=======\n(.*?)>>>>>>> [0-9a-z]+?\n',flags=re.DOTALL)
 
 # 将冲突文件分成两个版本的字符串
 def splitByVersion(filepath):

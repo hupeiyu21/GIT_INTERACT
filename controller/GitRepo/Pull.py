@@ -24,5 +24,5 @@ class Pull(Resource):
                     "commitid":nowcommitid}
         else:
             # 显示冲突
-            return {'msg':"files conflict",'files':diff(repodir)},400
+            return {'msg':"Some files conflict","foldertree":thefoldertree,'files':diff(repodir)},400
         

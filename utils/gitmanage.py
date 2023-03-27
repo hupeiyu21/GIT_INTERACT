@@ -88,7 +88,6 @@ def pull(dir):
     try:
         pullres=repo.git.pull()
     except Exception as e:
-        elist=[w.strip() for w in str(e).split("\n")]
-        if "unmerged files" in elist:
+        if "conflict" in str(e) or "unmerged" in str(e):
             return False
     return True

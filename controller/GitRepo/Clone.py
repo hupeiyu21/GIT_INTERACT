@@ -29,4 +29,5 @@ class Clone(Resource):
             thefoldertree = foldertree(os.path.join(current_app.config['localstore'], reponame),iteractive=True)
             return {'reponame': reponame, 'logs': logs, 'foldertree': thefoldertree,"commitid":nowcommitid,"msg":"successful clone"}
         except Exception as e:
+            # print(str(e))
             return {'msg':"Error when clone"},400

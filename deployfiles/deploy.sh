@@ -26,6 +26,9 @@ cd ../$BACK_NAME
 git pull || true
 cd ../
 
+echo "please change the baseurl in the Frontend"
+read -n 1
+
 # 构建镜像，其中--rm参数决定是否删除中间层
 DOCKER_BUILDKIT=0 && docker build --rm=false -t "flaskgitmanageimage$TIMESTAMP" .
 

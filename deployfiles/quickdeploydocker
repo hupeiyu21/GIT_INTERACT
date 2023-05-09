@@ -1,0 +1,7 @@
+FROM sanmusen214/xjtlu-fyp-yusen AS baseimage
+
+
+COPY id_rsa /root/.ssh/
+RUN chown 1000:1000 /root/.ssh/id_rsa
+
+CMD service redis-server start && gunicorn 04managegit:createapp\(\) -c ./gunicorn.conf.py

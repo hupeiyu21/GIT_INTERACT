@@ -1,0 +1,1 @@
+docker build -f ./makeimage -t sanmusen214/xjtlu-fyp-yusen .

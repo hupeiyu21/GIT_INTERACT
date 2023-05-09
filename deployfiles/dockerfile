@@ -2,11 +2,11 @@ FROM node:16.14.2 AS front_build_base
 WORKDIR /Project/Front
 ENV FRONT_NAME=Editor
 # RUN rm package-lock.json
-RUN npm set registry https://registry.npm.taobao.org/ && \
-    npm install -g npm
 
 COPY ./Editor/package.json package.json
-RUN npm install
+RUN npm config set registry https://registry.npm.taobao.org/ && \
+    yarn config set registry https://registry.npm.taobao.org/ && \
+    yarn
 
 COPY ./Editor/  .
 RUN npm run build
@@ -18,12 +18,14 @@ ENV BACK_NAME=GIT_INTERACT
 RUN pip install --upgrade pip -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 # apt-get换源
+
 # 不同版本号源不一样 cat /etc/os-release
 # 1：# docker内sourcelist换源：https://blog.csdn.net/weixin_38556197/article/details/128139108
 # RUN sed -i s@/archive.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list
 # or 2： https://blog.csdn.net/qq_36973540/article/details/125960846
+# 2023年4月后，国内镜像源全部把stretch（9）版本归档为过气版本，因此镜像源url发生变化
 RUN echo > /etc/apt/sources.list && \
-    echo "deb http://mirrors.aliyun.com/debian/ stretch main non-free contrib \ndeb-src http://mirrors.aliyun.com/debian/ stretch main non-free contrib \ndeb http://mirrors.aliyun.com/debian-security stretch/updates main \ndeb-src http://mirrors.aliyun.com/debian-security stretch/updates main \ndeb http://mirrors.aliyun.com/debian/ stretch-updates main non-free contrib \ndeb-src http://mirrors.aliyun.com/debian/ stretch-updates main non-free contrib \ndeb http://mirrors.aliyun.com/debian/ stretch-backports main non-free contrib \ndeb-src http://mirrors.aliyun.com/debian/ stretch-backports main non-free contrib" > /etc/apt/sources.list
+    echo "deb http://mirrors.aliyun.com/debian-archive/debian/ stretch main non-free contrib \ndeb-src http://mirrors.aliyun.com/debian-archive/debian/ stretch main non-free contrib \ndeb http://mirrors.aliyun.com/debian-archive/debian-security/ stretch/updates main\ndeb-src http://mirrors.aliyun.com/debian-archive/debian-security/ stretch/updates main\ndeb http://mirrors.aliyun.com/debian-archive/debian/ stretch-proposed-updates main non-free contrib \ndeb-src http://mirrors.aliyun.com/debian-archive/debian/ stretch-proposed-updates main non-free contrib \ndeb http://mirrors.aliyun.com/debian-archive/debian/ stretch-backports main non-free contrib \ndeb-src http://mirrors.aliyun.com/debian-archive/debian/ stretch-backports main non-free contrib" > /etc/apt/sources.list
 # or 3：# 阿里开源站（Debian和Debian security）：https://developer.aliyun.com/mirror/?serviceType=&tag=&keyword=debian
 # RUN echo > /etc/apt/sources.list && \
 #     echo "deb https://mirrors.aliyun.com/debian/ stretch main non-free contrib" >> /etc/apt/sources.list && \
@@ -34,8 +36,8 @@ RUN echo > /etc/apt/sources.list && \
 #     echo "deb-src https://mirrors.aliyun.com/debian/ stretch-updates main non-free contrib" >> /etc/apt/sources.list && \
 #     echo "deb https://mirrors.aliyun.com/debian/ stretch-backports main non-free contrib" >> /etc/apt/sources.list && \
 #     echo "deb-src https://mirrors.aliyun.com/debian/ stretch-backports main non-free contrib" >> /etc/apt/sources.list && \
-#     echo "deb http://mirrors.aliyun.com/debian-security/ squeeze/updates main non-free contrib" >> /etc/apt/sources.list && \
-#     echo "deb-src http://mirrors.aliyun.com/debian-security/ squeeze/updates main non-free contrib" >> /etc/apt/sources.list
+#     echo "deb http://mirrors.aliyun.com/debian-archive/debian-security// squeeze/updates main non-free contrib" >> /etc/apt/sources.list && \
+#     echo "deb-src http://mirrors.aliyun.com/debian-archive/debian-security// squeeze/updates main non-free contrib" >> /etc/apt/sources.list
 
 # 更新apt-get
 RUN apt-get clean && \

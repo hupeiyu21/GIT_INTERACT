@@ -49,8 +49,12 @@ def log(dir):
     :param dir: 本地项目的文件夹绝对路径
     '''
     # hash comitter time title
-    ret, out = subprocess.getstatusoutput(
-        'cd {} && git log --all --encoding=GBK --pretty=format:"%H%n%cn%n%ci%n%s%n"'.format(dir))
+    try:
+        ret, out = subprocess.getstatusoutput(
+            'cd {} && git log --all --encoding=GBK --pretty=format:"%H%n%cn%n%ci%n%s%n"'.format(dir))
+    except Exception as e:
+        ret, out = subprocess.getstatusoutput(
+            'cd {} && git log --all --encoding=utf8 --pretty=format:"%H%n%cn%n%ci%n%s%n"'.format(dir))
     return [dict(zip(infomat, each.split("\n"))) for each in out.split("\n\n")]
 
 def nowcommit(dir):

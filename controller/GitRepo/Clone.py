@@ -3,6 +3,7 @@ from flask import current_app,abort,Response,jsonify
 import os
 from utils.gitmanage import clone,log,nowcommit
 from utils.filemanage import foldertree
+import traceback
 
 class Clone(Resource):
     
@@ -30,4 +31,4 @@ class Clone(Resource):
             return {'reponame': reponame, 'logs': logs, 'foldertree': thefoldertree,"commitid":nowcommitid,"msg":"successful clone"}
         except Exception as e:
             # print(str(e))
-            return {'msg':"Error when clone"},400
+            return {'msg':"Error when clone:{}".format(traceback.format_exc())},400
